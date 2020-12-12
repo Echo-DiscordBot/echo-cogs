@@ -57,7 +57,7 @@ class LyricsFinder(commands.Cog):
                         e.set_footer(
                             text='Requested by {} | Source: {} | Page: {}/{}'.format(track.requester, source, index+1,
                                                                                      len(paged_content)))
-                        await notify_channel.send(embed=e,delete_after=20.0)
+                        await notify_channel.send(embed=e,delete_after=600.0)
                         paged_embeds.append(e)
                 #await menu(notify_channel, paged_embeds, controls=DEFAULT_CONTROLS, timeout=180.0)
                 
