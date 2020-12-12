@@ -50,7 +50,7 @@ class LyricsFinder(commands.Cog):
                 async with notify_channel.typing():
                     title, artist, lyrics, source = await getlyrics(botsong)
                     paged_embeds = []
-                    paged_content = [p for p in pagify(lyrics, page_length=900)]
+                    paged_content = [p for p in pagify(lyrics, page_length=999999)]
                     for index, page in enumerate(paged_content):
                         e = discord.Embed(title='{} by {}'.format(title, artist), description=page,
                                           colour=await self.bot.get_embed_color(notify_channel))
