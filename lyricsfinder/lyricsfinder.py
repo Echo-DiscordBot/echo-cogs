@@ -58,7 +58,6 @@ class LyricsFinder(commands.Cog):
                             text='Requested by {} | Source: {} | Page: {}/{}'.format(track.requester, source, index+1,
                                                                                      len(paged_content)))
                         paged_embeds.append(e)
-                        await notify_channel.send(embed=pagedcontent)
                 await menu(notify_channel, paged_embeds, controls=DEFAULT_CONTROLS, timeout=180.0)
             except discord.Forbidden:
                 return await notify_channel.send("Missing embed permissions..")
