@@ -1,6 +1,6 @@
 {
   "author": ["Wyn"],
-  "install_msg": "Thank you for installing lyrics. Type `[p]lyrics` for more information.",
+  "install_msg": "Thank you for installing lyrics. Type `[p]lyricsfinder` for more information.",
   "name": "LyricsFinder",
   "short": "Obtains song lyrics",
   "description": "Obtain song lyrics",
