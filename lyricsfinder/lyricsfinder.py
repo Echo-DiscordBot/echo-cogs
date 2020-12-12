@@ -55,7 +55,7 @@ class LyricsFinder(commands.Cog):
                         e = discord.Embed(title='{} by {}'.format(title, artist), description=page,
                                           colour=await self.bot.get_embed_color(notify_channel))
                         e.set_footer(
-                            text='Requested by {} | Source: {} | Page: {}/{}'.format(track.requester, source, index,
+                            text='Requested by {} | Source: {} | Page: {}/{}'.format(track.requester, source, index+1,
                                                                                      len(paged_content)))
                         paged_embeds.append(e)
                 await menu(notify_channel, paged_embeds, controls=DEFAULT_CONTROLS, timeout=180.0)
@@ -99,7 +99,7 @@ class LyricsFinder(commands.Cog):
                     e = discord.Embed(title='{} by {}'.format(title, artist), description=page,
                                       colour=await self.bot.get_embed_color(ctx.channel))
                     e.set_footer(
-                        text='Requested by {} | Source: {} | Page: {}/{}'.format(ctx.message.author, source, index,
+                        text='Requested by {} | Source: {} | Page: {}/{}'.format(ctx.message.author, source, index+1,
                                                                                  len(paged_content)))
                     paged_embeds.append(e)
             await menu(ctx, paged_embeds, controls=DEFAULT_CONTROLS, timeout=180.0)
@@ -137,7 +137,7 @@ class LyricsFinder(commands.Cog):
                     e = discord.Embed(title='{} by {}'.format(title, artist), description=page,
                                       colour=await self.bot.get_embed_color(ctx.channel))
                     e.set_footer(
-                        text='Requested by {} | Source: {} | Page: {}/{}'.format(ctx.message.author, source, index,
+                        text='Requested by {} | Source: {} | Page: {}/{}'.format(ctx.message.author, source, index+1,
                                                                                  len(paged_content)))
                     paged_embeds.append(e)
             await menu(ctx, paged_embeds, controls=DEFAULT_CONTROLS, timeout=180.0)
@@ -169,7 +169,7 @@ class LyricsFinder(commands.Cog):
                     e = discord.Embed(title='{} by {}'.format(title, artist), description=page,
                                       colour=await self.bot.get_embed_color(ctx.channel))
                     e.set_footer(
-                        text='Requested by {} | Source: {} | Page: {}/{}'.format(ctx.message.author, source, index,
+                        text='Requested by {} | Source: {} | Page: {}/{}'.format(ctx.message.author, source, index+1,
                                                                                  len(paged_content)))
                     paged_embeds.append(e)
             await menu(ctx, paged_embeds, controls=DEFAULT_CONTROLS, timeout=180.0)
