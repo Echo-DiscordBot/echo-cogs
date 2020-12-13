@@ -28,7 +28,6 @@ class Utilities(commands.Cog):
         embed.add_field(name="Latitude", value=values['lat'], inline=True)
         embed.add_field(name="Longitude", value=values['lon'], inline=True)
         embed.add_field(name="Timezone", value=values['timezone'], inline=True)
-        embed.add_field(name="Currency", value=values['currency'], inline=True)
         embed.add_field(name="ISP", value=values['isp'], inline=True)
         await ctx.send(embed=embed)
 
