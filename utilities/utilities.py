@@ -10,8 +10,8 @@ from discord.ext.commands import bot
 class Utilities(commands.Cog, name="Utilities"):
     def __init__(self, bot):
         self.bot = bot
-        with open("utilities/gifs/error.txt") as f:
-            self.choices_error = f.readlines()
+        #with open("utilities/gifs/error.txt") as f:
+        #    self.choices_error = f.readlines()
 
     @commands.command()
     async def iplookup(self, ctx, arg):
@@ -37,7 +37,7 @@ class Utilities(commands.Cog, name="Utilities"):
         if isinstance(error, discord.ext.commands.errors.MissingRequiredArgument):
             author = ctx.message.author.mention
             msg = "***{0} you need too input a ip!***"
-            image = random.choice(self.choices_error)
+            image = "https://66.media.tumblr.com/98c6d9e942941712e0ef9518fca97a7c/tumblr_opni85yA931v8tshbo1_400.gif"
             embed = discord.Embed(
                 description=msg.format(author),
                 colour=discord.Colour.blue()
