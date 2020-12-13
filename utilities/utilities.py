@@ -22,12 +22,15 @@ class Utilities(commands.Cog):
         )
         embed.set_author(name="IP Lookup Details")
 
-        embed.add_field(name="IP", value=values['query'], inline=True)
+        embed.add_field(name="IP", value=values['query'], inline=False)
+        embed.add_field(name="Continent", value=values['continent'], inline=True)        
         embed.add_field(name="Country", value=values['country'], inline=True)
-        embed.add_field(name="Region", value=values['region'], inline=True)
+        embed.add_field(name="Region", value=values['regionName'], inline=True)
         embed.add_field(name="City", value=values['city'], inline=True)
         embed.add_field(name="Latitude", value=values['lat'], inline=True)
         embed.add_field(name="Longitude", value=values['lon'], inline=True)
+        embed.add_field(name="Timezone", value=values['timezone'], inline=True)
+        embed.add_field(name="Currency", value=values['currency'], inline=True)
         embed.add_field(name="ISP", value=values['isp'], inline=True)
         await ctx.send(embed=embed)
 
