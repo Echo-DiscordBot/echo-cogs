@@ -22,4 +22,4 @@ I agree
 | [Utilities](https://github.com/Echo-DiscordBot/echo-cogs/tree/main/utilities) | IP Lookup |
 
 ## Support/Contact
-For any suggestions or issues, feel free to ask in the #support-cogs channel of [EchoZONE]((https://discord.gg/NXk5ZuC)
+For any suggestions or issues, feel free to ask in the #support-cogs channel of [EchoZONE](https://discord.gg/NXk5ZuC)
