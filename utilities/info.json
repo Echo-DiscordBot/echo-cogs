@@ -1,0 +1,15 @@
+{
+  "author": ["anamolsapkota"],
+  "install_msg": "Thank you for installing lyrics. Type `[p]utilities` for more information.",
+  "name": "Utilities",
+  "short": "Utilities",
+  "description": "Utilities",
+  "disabled": false,
+  "tags": [
+    "utilities"
+  ],
+  "requirements": [],
+  "min_python_version": [
+    3, 6, 0
+  ],
+  "end_user_data_statement": "This cog does not persistently store data or metadata about users."
