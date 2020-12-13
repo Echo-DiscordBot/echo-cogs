@@ -10,7 +10,7 @@ from discord.ext.commands import bot
 class Utilities(commands.Cog, name="Utilities"):
     def __init__(self, bot):
         self.bot = bot
-        with open("gifs/error.txt") as f:
+        with open("utilities/gifs/error.txt") as f:
             self.choices_error = f.readlines()
 
     @commands.command()
