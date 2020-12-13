@@ -24,7 +24,7 @@ class Utilities(commands.Cog):
         )
         embed.set_author(name="IP Lookup Details")
         embed.add_field(name="IP", value=values['query'], inline=False)       
-        embed.add_field(name="Country", value=values['country'], inline=True)
+        embed.add_field(name="Country", value=values['country'] || 'Not available', inline=True)
         embed.add_field(name="Region", value=values['regionName'], inline=True)
         embed.add_field(name="City", value=values['city'], inline=True)
         embed.add_field(name="Latitude", value=values['lat'], inline=True)
