@@ -12,7 +12,7 @@ class Utilities(commands.Cog):
         #with open("utilities/gifs/error.txt") as f:
         #    self.choices_error = f.readlines()
 
-    @commands.command(name="iplookup", aliases=["ip", "ipinfo")
+    @commands.command(name="iplookup", aliases=["ip", "ipinfo"])
     async def iplookup(self, ctx, arg):
         if arg=="mine":
             arg = ""
