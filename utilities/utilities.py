@@ -13,7 +13,7 @@ class Utilities(commands.Cog):
         #    self.choices_error = f.readlines()
 
     @commands.command()
-    async def iplookup(self, ctx, arg):
+    async def iplookup(self, ctx, arg: None):
         suffix = (arg)
         lookup = ("http://ip-api.com/json/" + suffix)
         values = requests.get(lookup).json()
