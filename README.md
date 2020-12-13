@@ -13,3 +13,10 @@ I agree
 [p]cog install echo-cogs <cogname>
 [p]load <installed_cog>
 ```
+
+## Cogs
+
+| Name | Description |
+| ---- | ----------- |
+| [LyricsFinder](https://github.com/Echo-DiscordBot/echo-cogs/tree/main/lyricsfinder) | Obtains song lyrics |
+| [Utilities](https://github.com/Echo-DiscordBot/echo-cogs/tree/main/utilities) | IP Lookup |
