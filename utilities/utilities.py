@@ -19,21 +19,18 @@ class Utilities(commands.Cog):
         values = requests.get(lookup).json()
         if values['status']=="fail":
             return await ctx.send("Please provide a valid argument")
-        if values['country']=="":
-            values['country']="Not available"
-            return values['country']
         embed = discord.Embed(
             colour=await self.bot.get_embed_color(ctx.channel)
         )
         embed.set_author(name="IP Lookup Details")
-        embed.add_field(name="IP", value=values['query'], inline=False)       
-        embed.add_field(name="Country", value=values['country'], inline=True)
-        embed.add_field(name="Region", value=values['regionName'], inline=True)
-        embed.add_field(name="City", value=values['city'], inline=True)
-        embed.add_field(name="Latitude", value=values['lat'], inline=True)
-        embed.add_field(name="Longitude", value=values['lon'], inline=True)
-        embed.add_field(name="Timezone", value=values['timezone'], inline=True)
-        embed.add_field(name="ISP", value=values['isp'], inline=True)
+        embed.add_field(name="IP", value=values['query']+ "\u200b", inline=False)       
+        embed.add_field(name="Country", value=values['country']+ "\u200b", inline=True)
+        embed.add_field(name="Region", value=values['regionName']+ "\u200b", inline=True)
+        embed.add_field(name="City", value=values['city']+ "\u200b", inline=True)
+        embed.add_field(name="Latitude", value=values['lat']+ "\u200b", inline=True)
+        embed.add_field(name="Longitude", value=values['lon']+ "\u200b", inline=True)
+        embed.add_field(name="Timezone", value=values['timezone']+ "\u200b", inline=True)
+        embed.add_field(name="ISP", value=values['isp']+ "\u200b", inline=True)
         await ctx.send(embed=embed)
 
     @iplookup.error
