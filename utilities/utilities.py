@@ -21,7 +21,7 @@ class Utilities(commands.Cog):
     async def iplookup(self, ctx, ip=None):
       if ip is None:
           print('\n[LOGS] Must enter a ip!')
-            await ctx.send('Must enter a ip!')
+          await ctx.send('Must enter a ip!')
         else:
             print(f'\n[LOGS] Running whois on {ip}')
             host = socket.gethostbyname(ip)
