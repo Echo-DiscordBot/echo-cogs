@@ -6,7 +6,7 @@ import random
 import json
 import requests
 from redbot.core import commands, Config
-from lxml import etree
+from lxml-stubs import etree
 from urllib.parse import parse_qs
 
 
