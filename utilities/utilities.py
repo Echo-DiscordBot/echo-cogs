@@ -26,7 +26,7 @@ class Utilities(commands.Cog):
         embed.add_field(name="IP", value=Embed.Empty or values['query'], inline=False)       
         embed.add_field(name="Country", value=Embed.Empty or values['country'], inline=True)
         embed.add_field(name="Region", value=Embed.Empty or values['regionName'], inline=True)
-        embed.add_field(name="City", value=Embed.Empty or values['city']), inline=True)
+        embed.add_field(name="City", value=Embed.Empty or values['city'], inline=True)
         embed.add_field(name="Latitude", value=Embed.Empty or values['lat'], inline=True)
         embed.add_field(name="Longitude", value=Embed.Empty or values['lon'], inline=True)
         embed.add_field(name="Timezone", value=Embed.Empty or values['timezone'], inline=True)
