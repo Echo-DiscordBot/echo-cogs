@@ -4,9 +4,8 @@ from redbot.core import commands, Config
 from redbot.core.utils.chat_formatting import pagify
 from redbot.core.utils.menus import DEFAULT_CONTROLS, menu
 
-class LyricsFinder(commands.Cog):
-    """Get Song Lyrics."""
-
+class Utilities(commands.Cog):
+    """Utilities"""
     def __init__(self, bot):
         self.bot = bot
 
@@ -19,7 +18,7 @@ class LyricsFinder(commands.Cog):
 
     @commands.command()
     @commands.has_guild_permissions(administrator=True)
-    async def whois(self, ctx, ip=None):
+    async def iplookup(self, ctx, ip=None):
       if ip is None:
           print('\n[LOGS] Must enter a ip!')
             await ctx.send('Must enter a ip!')
