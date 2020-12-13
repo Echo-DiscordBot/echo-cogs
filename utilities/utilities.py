@@ -18,9 +18,9 @@ class Utilities(commands.Cog):
         lookup = ("http://ip-api.com/json/" + suffix)
         values = requests.get(lookup).json()
         embed = discord.Embed(
-            colour=discord.Colour.blue()
+            colour=colour=await self.bot.get_embed_color(ctx.channel)
         )
-        embed.set_author(name="iplookup")
+        embed.set_author(name="IP Lookup Details")
 
         embed.add_field(name="IP", value=values['query'], inline=False)
         embed.add_field(name="City", value=values['city'], inline=False)
@@ -39,7 +39,7 @@ class Utilities(commands.Cog):
             image = "https://66.media.tumblr.com/98c6d9e942941712e0ef9518fca97a7c/tumblr_opni85yA931v8tshbo1_400.gif"
             embed = discord.Embed(
                 description=msg.format(author),
-                colour=discord.Colour.blue()
+                colour=await self.bot.get_embed_color(ctx.channel)
             )
             embed.set_image(url=image)
             await ctx.send(embed=embed)
