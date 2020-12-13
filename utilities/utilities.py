@@ -14,8 +14,6 @@ class Utilities(commands.Cog):
 
     @commands.command(name="iplookup", aliases=["ip", "ipinfo"])
     async def iplookup(self, ctx, arg):
-        if arg=="mine":
-            arg = ""
         suffix = (arg)
         lookup = ("http://ip-api.com/json/" + suffix + "?fields=66846719")
         values = requests.get(lookup).json()
