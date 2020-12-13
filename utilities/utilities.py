@@ -1,48 +1,50 @@
 import discord
+import os
+import random
+import json
+import requests
+from discord.ext import commands
+from discord.ext.commands import bot
 
-from redbot.core import commands, Config
-from redbot.core.utils.chat_formatting import pagify
-from redbot.core.utils.menus import DEFAULT_CONTROLS, menu
 
-class Utilities(commands.Cog):
-    """Utilities"""
+class Utilities(commands.Cog, name="Utilities"):
     def __init__(self, bot):
         self.bot = bot
-
-    def cog_unload(self):
-        self._cache = {}
-
-    async def red_delete_data_for_user(self, **kwargs):
-        """Nothing to delete."""
-        return
+        with open("gifs/error.txt") as f:
+            self.choices_error = f.readlines()
 
     @commands.command()
-    @commands.has_guild_permissions(administrator=True)
-    async def iplookup(self, ctx, ip=None):
-      if ip is None:
-          print('\n[LOGS] Must enter a ip!')
-          await ctx.send('Must enter a ip!')
-      else:
-          print(f'\n[LOGS] Running whois on {ip}')
-          host = socket.gethostbyname(ip)
-          w = IPWhois(host)
-          res = w.lookup_whois(inc_nir=True)
-          final_res = """
-    IP: {}
-    IP Range: {}
-    Name: {}
-    Handle: {}
-    Registry: {}
-    Description: {}
-    Date: {}
-    Updated: {}
-    Country: {} 
-    State: {}
-    City: {}
-    Address: {}
-    Postal Code: {}
-          """.format(res['query'], res['nets'][0]['range'], res['nets'][0]['name'], res['nets'][0]['handle'], res['asn_registry'], res['asn_description'], res['asn_date'], res['nets'][0]['updated'], res['nets'][0]['country'], res['nets'][0]['state'], res['nets'][0]['city'], res['nets'][0]['address'], res['nets'][0]['postal_code'])
-          print(final_res)
-          await ctx.send(final_res)
-        
- 
+    async def iplookup(self, ctx, arg):
+        suffix = (arg)
+        lookup = ("http://ip-api.com/json/" + suffix)
+        values = requests.get(lookup).json()
+        embed = discord.Embed(
+            colour=discord.Colour.blue()
+        )
+        embed.set_author(name="iplookup")
+
+        embed.add_field(name="IP", value=values['query'], inline=False)
+        embed.add_field(name="City", value=values['city'], inline=False)
+        embed.add_field(name="Region", value=values['region'], inline=False)
+        embed.add_field(name="Country", value=values['country'], inline=False)
+        embed.add_field(name="lat", value=values['lat'], inline=False)
+        embed.add_field(name="lon", value=values['lon'], inline=False)
+        embed.add_field(name="ISP", value=values['isp'], inline=False)
+        await ctx.send(embed=embed)
+
+    @iplookup.error
+    async def iplookup_error(self, ctx, error):
+        if isinstance(error, discord.ext.commands.errors.MissingRequiredArgument):
+            author = ctx.message.author.mention
+            msg = "***{0} you need too input a ip!***"
+            image = random.choice(self.choices_error)
+            embed = discord.Embed(
+                description=msg.format(author),
+                colour=discord.Colour.blue()
+            )
+            embed.set_image(url=image)
+            await ctx.send(embed=embed)
+
+
+def setup(bot):
+    bot.add_cog(Utilities(bot))
