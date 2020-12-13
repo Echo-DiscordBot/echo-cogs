@@ -45,6 +45,5 @@ class Utilities(commands.Cog, name="Utilities"):
             embed.set_image(url=image)
             await ctx.send(embed=embed)
 
-
 def setup(bot):
     bot.add_cog(Utilities(bot))
