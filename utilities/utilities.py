@@ -19,12 +19,14 @@ class Utilities(commands.Cog):
         values = requests.get(lookup).json()
         if values['status']=="fail":
             return await ctx.send("Please provide a valid argument")
+        if values['country']=="":
+            values['country']="Not available"
         embed = discord.Embed(
             colour=await self.bot.get_embed_color(ctx.channel)
         )
         embed.set_author(name="IP Lookup Details")
         embed.add_field(name="IP", value=values['query'], inline=False)       
-        embed.add_field(name="Country", value=if values['country']="": values['country'] else: "Not available", inline=True)
+        embed.add_field(name="Country", value=values['country'], inline=True)
         embed.add_field(name="Region", value=values['regionName'], inline=True)
         embed.add_field(name="City", value=values['city'], inline=True)
         embed.add_field(name="Latitude", value=values['lat'], inline=True)
