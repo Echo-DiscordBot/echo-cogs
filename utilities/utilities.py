@@ -3,11 +3,10 @@ import os
 import random
 import json
 import requests
-from discord.ext import commands
-from discord.ext.commands import bot
+from redbot.core import commands, Config
 
 
-class Utilities(commands.Cog, name="Utilities"):
+class Utilities(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         #with open("utilities/gifs/error.txt") as f:
