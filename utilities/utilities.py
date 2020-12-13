@@ -17,6 +17,8 @@ class Utilities(commands.Cog):
         suffix = (arg)
         lookup = ("http://ip-api.com/json/" + suffix)
         values = requests.get(lookup).json()
+        if values['status']=="fail":
+            return await ctx.send("Please provide a valid argument")
         embed = discord.Embed(
             colour=await self.bot.get_embed_color(ctx.channel)
         )
