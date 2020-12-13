@@ -18,7 +18,7 @@ class Utilities(commands.Cog):
         lookup = ("http://ip-api.com/json/" + suffix)
         values = requests.get(lookup).json()
         embed = discord.Embed(
-            colour=colour=await self.bot.get_embed_color(ctx.channel)
+            colour=await self.bot.get_embed_color(ctx.channel)
         )
         embed.set_author(name="IP Lookup Details")
 
