@@ -30,7 +30,6 @@ class Utilities(commands.Cog, name="Utilities"):
         embed.add_field(name="lat", value=values['lat'], inline=False)
         embed.add_field(name="lon", value=values['lon'], inline=False)
         embed.add_field(name="ISP", value=values['isp'], inline=False)
-
         await ctx.send(embed=embed)
 
     @iplookup.error
