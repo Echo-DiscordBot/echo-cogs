@@ -57,7 +57,7 @@ class LyricsFinder(commands.Cog):
                         e.set_footer(
                             text='Requested by {} | Source: {} | Page: {}/{}'.format(track.requester, source, index+1,
                                                                                      len(paged_content)))
-                        await notify_channel.send(embed=e,delete_after=600.0)
+                        await notify_channel.send(embed=e,delete_after=420.0)
                         paged_embeds.append(e)
                 #await menu(notify_channel, paged_embeds, controls=DEFAULT_CONTROLS, timeout=180.0)
                 
@@ -104,7 +104,7 @@ class LyricsFinder(commands.Cog):
                         text='Requested by {} | Source: {} | Page: {}/{}'.format(ctx.message.author, source, index+1,
                                                                                  len(paged_content)))
                     paged_embeds.append(e)
-            await menu(ctx, paged_embeds, controls=DEFAULT_CONTROLS, timeout=180.0)
+            await menu(ctx, paged_embeds, controls=DEFAULT_CONTROLS, timeout=420.0)
         except discord.Forbidden:
             return await ctx.send("Missing embed permissions..")
 
@@ -142,7 +142,7 @@ class LyricsFinder(commands.Cog):
                         text='Requested by {} | Source: {} | Page: {}/{}'.format(ctx.message.author, source, index+1,
                                                                                  len(paged_content)))
                     paged_embeds.append(e)
-            await menu(ctx, paged_embeds, controls=DEFAULT_CONTROLS, timeout=180.0)
+            await menu(ctx, paged_embeds, controls=DEFAULT_CONTROLS, timeout=420.0)
         except discord.Forbidden:
             return await ctx.send("Missing embed permissions..")
 
@@ -174,7 +174,7 @@ class LyricsFinder(commands.Cog):
                         text='Requested by {} | Source: {} | Page: {}/{}'.format(ctx.message.author, source, index+1,
                                                                                  len(paged_content)))
                     paged_embeds.append(e)
-            await menu(ctx, paged_embeds, controls=DEFAULT_CONTROLS, timeout=180.0)
+            await menu(ctx, paged_embeds, controls=DEFAULT_CONTROLS, timeout=420.0)
         except discord.Forbidden:
             return await ctx.send("Missing embed permissions..")
 
