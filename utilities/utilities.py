@@ -20,7 +20,7 @@ class Utilities(commands.Cog):
         if values['status']=="fail":
             return await ctx.send("Please provide a valid argument")
         if values['country']=="":
-            values['country']="Not available"
+            return values['country']="Not available"
         embed = discord.Embed(
             colour=await self.bot.get_embed_color(ctx.channel)
         )
