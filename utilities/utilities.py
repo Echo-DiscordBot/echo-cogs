@@ -71,10 +71,12 @@ class Utilities(commands.Cog):
         await ctx.trigger_typing()
 
         try:
-            session = self.acquire_session()
-            session.get(f'https://ipapi.co/{ip}/json/') as resp:
-                resp.raise_for_status()
-                data = json.loads(await resp.read(), object_hook=DictObject)
+            lookup = ("http://ipapi.co/" + ip + "/json/")
+            data = requests.get(lookup).json()
+#             session = self.acquire_session()
+#             session.get(f'https://ipapi.co/{ip}/json/') as resp:
+#                 resp.raise_for_status()
+#                 data = json.loads(await resp.read(), object_hook=DictObject)
                     
             ipaddr = data["ip"]
             city = data["city"]
