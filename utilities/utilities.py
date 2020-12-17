@@ -72,7 +72,7 @@ class Utilities(commands.Cog):
 
         try:
             session = self.acquire_session()
-            async with session.get(f'https://ipapi.co/{ip}/json/') as resp:
+            session.get(f'https://ipapi.co/{ip}/json/') as resp:
                 resp.raise_for_status()
                 data = json.loads(await resp.read(), object_hook=DictObject)
                     
