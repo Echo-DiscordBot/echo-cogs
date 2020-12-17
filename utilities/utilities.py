@@ -14,8 +14,6 @@ class Utilities(commands.Cog):
 
     @commands.command(name="iplookup", aliases=["ip", "ipinfo"])
     async def iplookup(self, ctx, arg):
-        if arg=="mine":
-            arg = ""
         suffix = (arg)
         lookup = ("http://ip-api.com/json/" + suffix + "?fields=66846719")
         values = requests.get(lookup).json()
@@ -40,4 +38,5 @@ class Utilities(commands.Cog):
         embed.add_field(name="💸 Currency", value=values['currency'] or "N/A", inline=True)
         embed.add_field(name="⏲️ Timezone", value=values['timezone'] or "N/A", inline=True)
         embed.add_field(name="🌐 ISP/Organization", value=values['isp'] or values['org'] or "Not available", inline=False)
+        embed.set_footer(text=f"Requested by: {ctx.message.author}", icon_url=ctx.message.author.avatar_url)
         await ctx.send(embed=embed)
