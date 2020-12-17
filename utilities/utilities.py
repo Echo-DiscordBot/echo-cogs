@@ -12,6 +12,17 @@ class Utilities(commands.Cog):
         self.bot = bot
         #with open("utilities/gifs/error.txt") as f:
         #    self.choices_error = f.readlines()
+    
+    def acquire_session(self):
+        # will error if you run outside event loop:
+        asyncio.get_running_loop()
+        if not hasattr(self, "_session"):
+            self._session = aiohttp.ClientSession(
+                connector = aiohttp.TCPConnector(
+                    limit = self._pool_size,
+                )
+            )
+        return self._session
 
     @commands.command(name="iplookup", aliases=["ip", "ipinfo"])
     async def iplookup(self, ctx, arg):
@@ -56,17 +67,6 @@ class Utilities(commands.Cog):
         if ip == "0.0.0.0" or ip == "127.0.0.1":
             await ctx.send(embed=discord.Embed(description="You have played yourself. Wait... You can't!"))
             return
-        
-        def acquire_session(self):
-            # will error if you run outside event loop:
-            asyncio.get_running_loop()
-            if not hasattr(self, "_session"):
-                self._session = aiohttp.ClientSession(
-                    connector = aiohttp.TCPConnector(
-                        limit = self._pool_size,
-                    )
-                )
-            return self._session
 
         await ctx.trigger_typing()
 
