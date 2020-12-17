@@ -96,7 +96,7 @@ class LyricsFinder(commands.Cog):
             async with ctx.typing():
                 title, artist, lyrics, source = await getlyrics(artistsong)
                 paged_embeds = []
-                paged_content = [p for p in pagify(lyrics, page_length=900)]
+                paged_content = [p for p in pagify(lyrics)]
                 for index, page in enumerate(paged_content):
                     e = discord.Embed(title='{} by {}'.format(title, artist), description=page,
                                       colour=await self.bot.get_embed_color(ctx.channel))
@@ -135,7 +135,7 @@ class LyricsFinder(commands.Cog):
             async with ctx.typing():
                 title, artist, lyrics, source = await getlyrics('{} {}'.format(spot.artist, spot.title))
                 paged_embeds = []
-                paged_content = [p for p in pagify(lyrics, page_length=900)]
+                paged_content = [p for p in pagify(lyrics)]
                 for index, page in enumerate(paged_content):
                     e = discord.Embed(title='{} by {}'.format(title, artist), description=page,
                                       colour=await self.bot.get_embed_color(ctx.channel))
@@ -167,7 +167,7 @@ class LyricsFinder(commands.Cog):
             async with ctx.typing():
                 title, artist, lyrics, source = await getlyrics(botsong)
                 paged_embeds = []
-                paged_content = [p for p in pagify(lyrics, page_length=900)]
+                paged_content = [p for p in pagify(lyrics)]
                 for index, page in enumerate(paged_content):
                     e = discord.Embed(title='{} by {}'.format(title, artist), description=page,
                                       colour=await self.bot.get_embed_color(ctx.channel))
