@@ -22,7 +22,7 @@ class Utilities(commands.Cog):
         embed = discord.Embed(
             colour=await self.bot.get_embed_color(ctx.channel)
         )
-        embed.set_author(name="🌐 IP Lookup Details")
+        embed.set_author(name=f"🌐 IP Lookup Details: {ctx.message}")
         embed.add_field(name="IP", value=values['query'] or "N/A", inline=False)
         embed.add_field(name="Mobile", value=values['mobile'] or "N/A", inline=True)
         embed.add_field(name="Proxy", value=values['proxy'] or "N/A", inline=True)
