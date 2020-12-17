@@ -3,6 +3,7 @@ import os
 import random
 import json
 import requests
+import aiohttp
 from redbot.core import commands, Config
 
 
@@ -55,6 +56,17 @@ class Utilities(commands.Cog):
         if ip == "0.0.0.0" or ip == "127.0.0.1":
             await ctx.send(embed=discord.Embed(description="You have played yourself. Wait... You can't!"))
             return
+        
+        def acquire_session(self):
+            # will error if you run outside event loop:
+            asyncio.get_running_loop()
+            if not hasattr(self, "_session"):
+                self._session = aiohttp.ClientSession(
+                    connector = aiohttp.TCPConnector(
+                        limit = self._pool_size,
+                    )
+                )
+            return self._session
 
         await ctx.trigger_typing()
 
