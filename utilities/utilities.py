@@ -13,6 +13,12 @@ from TagScriptEngine import Interpreter, adapter, block
 class Utilities(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        blocks = [
+            block.MathBlock(),
+            block.RandomBlock(),
+            block.RangeBlock(),
+        ]
+        self.engine = Interpreter(blocks)
 
     @commands.command(name="iplookup", aliases=["ip", "ipinfo"])
     async def iplookup(self, ctx, arg):
