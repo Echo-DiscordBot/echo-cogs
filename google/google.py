@@ -27,7 +27,7 @@ class Google(commands.Cog):
     e.set_thumbnail(url="https://media.discordapp.net/attachments/769165401879478302/787742449987878972/google_icon_131222.png")
     await ctx.send(embed=e)
     
-  @commands.command
+  @commands.command()
   async def googlenew(search_query):
     """Google New One"""
     percents = {" ": "+", "!": "%21", '"': "%22", "#": "%23", "$": "%24", "%": "%25", "&": "%26", "'": "%27",
