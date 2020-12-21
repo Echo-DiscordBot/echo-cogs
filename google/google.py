@@ -45,8 +45,8 @@ class Google(commands.Cog):
     try:
         title_ = soup.find('h3', class_="LC20lb DKV0Md").text
         text_ = soup.find('span', class_="aCOpRe").text
-        await ctx.send(title_)
-        await ctx.send(text_)
+        print(title_)
+        print(text_)
         #source_ = soup.find_all('span', class_="uEec3 AP7Wnd")[-1].get_text()
     except AttributeError:
         title_, text_ = "Not Found: {}".format(search_query), "Not Found: {}".format(search_query)
