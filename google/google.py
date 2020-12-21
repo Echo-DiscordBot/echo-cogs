@@ -47,7 +47,7 @@ class Google(commands.Cog):
         text_ = soup.find_all('span', class_="aCOpRe")[-1].get_text()
         #source_ = soup.find_all('span', class_="uEec3 AP7Wnd")[-1].get_text()
     except AttributeError:
-        title_, text_ = "Not Found: {}".format(search_query)
+        title_, text_ = "Not Found: {}".format(search_query), "Not Found: {}".format(search_query)
     session.close()
 
     e = discord.Embed(title=":desktop:  Google Search",
