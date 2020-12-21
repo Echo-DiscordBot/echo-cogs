@@ -43,15 +43,15 @@ class Google(commands.Cog):
     response_one = future.result()
     soup = BeautifulSoup(response_one.text, 'html.parser')
     try:
-        title_ = soup.find('h3', class_="LC20lb DKV0Md")[0].get_text()
-        text_ = soup.find('span', class_="aCOpRe")[0].get_text()
+        title_ = soup.find('h3', class_="LC20lb DKV0Md")[0].text
+        text_ = soup.find('span', class_="aCOpRe")[0].text
         await ctx.send(title_)
         await ctx.send(text_)
         #source_ = soup.find_all('span', class_="uEec3 AP7Wnd")[-1].get_text()
     except AttributeError:
         title_, text_ = "Not Found: {}".format(search_query), "Not Found: {}".format(search_query)
     e = discord.Embed(title=":desktop:  Google Search: {}".format(searchquery),
-                    description="{}\n\n{}".format(title_, , text_),
+                    description="{}\n\n{}".format(title_,text_),
                     colour=discord.Colour.red())
     #e.set_footer(text=footer)
     e.set_thumbnail(url="https://media.discordapp.net/attachments/769165401879478302/787742449987878972/google_icon_131222.png")
