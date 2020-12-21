@@ -1,6 +1,9 @@
+import discord
+
 from redbot.core import commands
 from datetime import datetime
-import discord
+from bs4 import BeautifulSoup
+from requests_futures.sessions import FuturesSession
 
 class Google(commands.Cog):
   
@@ -20,6 +23,36 @@ class Google(commands.Cog):
     e = discord.Embed(title=":desktop:  Google Search",
                       description="{}\n\n**[{}]({})**".format(hassearched, chfmi, multipleargs),
                       colour=discord.Colour.red())
+    e.set_footer(text=footer)
+    e.set_thumbnail(url="https://media.discordapp.net/attachments/769165401879478302/787742449987878972/google_icon_131222.png")
+    await ctx.send(embed=e)
+    
+  @commands.command
+  async def googlenew(search_query):
+    """Google New One"""
+    percents = {" ": "+", "!": "%21", '"': "%22", "#": "%23", "$": "%24", "%": "%25", "&": "%26", "'": "%27",
+                "(": "%28", ")": "%29", "*": "%2A", "+": "%2B", "`": "%60", ",": "%2C", "-": "%2D", ".": "%2E",
+                "/": "%2F"}
+    searchquery = ""
+    for char in search_query:
+        if char in percents.keys():
+            char = percents[char]
+        searchquery += char
+    session = FuturesSession()
+    future = session.get("https://google.com/search?q=" + searchquery)
+    response_one = future.result()
+    soup = BeautifulSoup(response_one.text, 'html.parser')
+    try:
+        title_ = soup.find('h3', class_="LC20lb DKV0Md").get_text()
+        text_ = soup.find_all('span', class_="aCOpRe")[-1].get_text()
+        #source_ = soup.find_all('span', class_="uEec3 AP7Wnd")[-1].get_text()
+    except AttributeError:
+        title_, text_ = "Not Found: {}".format(search_query)
+    session.close()
+
+    e = discord.Embed(title=":desktop:  Google Search",
+                    description="{}/n**{}**/n{}".format(title_, searchquery, text_),
+                    colour=discord.Colour.red())
     e.set_footer(text=footer)
     e.set_thumbnail(url="https://media.discordapp.net/attachments/769165401879478302/787742449987878972/google_icon_131222.png")
     await ctx.send(embed=e)
