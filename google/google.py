@@ -43,7 +43,7 @@ class Google(commands.Cog):
     response_one = future.result()
     soup = BeautifulSoup(response_one.text, 'html.parser')
     try:
-        title_ = soup.find('h3', class_="LC20lb DKV0Md").get_text()
+        title_ = soup.find_all('h3', class_="LC20lb DKV0Md").get_text()
         text_ = soup.find_all('span', class_="aCOpRe")[-1].get_text()
         #source_ = soup.find_all('span', class_="uEec3 AP7Wnd")[-1].get_text()
     except AttributeError:
