@@ -43,8 +43,8 @@ class Google(commands.Cog):
     response_one = future.result()
     soup = BeautifulSoup(response_one.text, 'html.parser')
     try:
-        title_ = soup.find('h3', class_="LC20lb DKV0Md")[0].text
-        text_ = soup.find('span', class_="aCOpRe")[0].text
+        title_ = soup.find('h3', class_="LC20lb DKV0Md").text
+        text_ = soup.find('span', class_="aCOpRe").text
         await ctx.send(title_)
         await ctx.send(text_)
         #source_ = soup.find_all('span', class_="uEec3 AP7Wnd")[-1].get_text()
