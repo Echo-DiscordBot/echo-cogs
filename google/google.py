@@ -48,11 +48,11 @@ class Google(commands.Cog):
         #source_ = soup.find_all('span', class_="uEec3 AP7Wnd")[-1].get_text()
     except AttributeError:
         title_, text_ = "Not Found: {}".format(search_query), "Not Found: {}".format(search_query)
-    session.close()
 
     e = discord.Embed(title=":desktop:  Google Search",
-                    description="{}/n**{}**/n{}".format(title_, searchquery, text_),
+                    description="{}\n**{}**\n{}".format(title_, searchquery, text_),
                     colour=discord.Colour.red())
     #e.set_footer(text=footer)
     e.set_thumbnail(url="https://media.discordapp.net/attachments/769165401879478302/787742449987878972/google_icon_131222.png")
+    session.close()
     await ctx.send(embed=e)
