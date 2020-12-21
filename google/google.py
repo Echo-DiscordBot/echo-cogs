@@ -1,4 +1,5 @@
 import discord
+import requests
 
 from redbot.core import commands
 from datetime import datetime
@@ -38,20 +39,20 @@ class Google(commands.Cog):
         if char in percents.keys():
             char = percents[char]
         searchquery += char
-    session = FuturesSession()
-    future = session.get("https://google.com/search?q=" + searchquery)
-    response_one = future.result()
+    #session = FuturesSession()
+    response_one = requests.get("https://google.com/search?q=" + searchquery)
+    #response_one = future.result()
     soup = BeautifulSoup(response_one.text, 'html.parser')
     try:
-        title_ = soup.find('h3', class_="LC20lb DKV0Md").text
-        text_ = soup.find('span', class_="aCOpRe").text
-        print(title_)
-        print(text_)
+        title1 = soup.find('h3', class_="LC20lb DKV0Md").text
+        text1 = soup.find('span', class_="aCOpRe").text
+        print(title1)
+        print(text1)
         #source_ = soup.find_all('span', class_="uEec3 AP7Wnd")[-1].get_text()
     except AttributeError:
         title_, text_ = "Not Found: {}".format(search_query), "Not Found: {}".format(search_query)
     e = discord.Embed(title=":desktop:  Google Search: {}".format(searchquery),
-                    description="{}\n\n{}".format(title_,text_),
+                    description="{}\n\n{}".format(title1,text1),
                     colour=discord.Colour.red())
     #e.set_footer(text=footer)
     e.set_thumbnail(url="https://media.discordapp.net/attachments/769165401879478302/787742449987878972/google_icon_131222.png")
