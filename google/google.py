@@ -48,8 +48,8 @@ class Google(commands.Cog):
         await ctx.send(title_)
         await ctx.send(text_)
         #source_ = soup.find_all('span', class_="uEec3 AP7Wnd")[-1].get_text()
-    except AttributeError:
-        title_, text_ = "Not Found: {}".format(search_query), "Not Found: {}".format(search_query)
+    #except AttributeError:
+    #    title_, text_ = "Not Found: {}".format(search_query), "Not Found: {}".format(search_query)
 
     e = discord.Embed(title=":desktop:  Google Search",
                     description="{}\n**{}**\n{}".format(title_, searchquery, text_),
