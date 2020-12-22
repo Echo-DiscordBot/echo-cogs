@@ -109,6 +109,8 @@ class Confession(BaseCog):
 
         try:
             await ctx.bot.send_filtered(destination=confession_room, embed=confession)
+            confession.set_footer(text="Message ID: {}".format(ctx.bot.send_filtered.id)
+            await ctx.bot.send_filtered.edit(destination=confession_room, embed=confession)
         except discord.errors.Forbidden:
             return await ctx.author.send("I don't have permission to send messages to this room or something went wrong.")
 
