@@ -1,0 +1,9 @@
+{
+  "author" : ["Jintaku"], anamolsapkota,
+  "bot_version": [3,0,0],
+  "install_msg" : "Let your users confess in secrecy!",
+  "short" : "Confess secretly.",
+  "description" : "Confess anonymously.",
+  "tags" : ["confession", "secret"],
+  "hidden" : false
+}
