@@ -111,7 +111,5 @@ class Confession(BaseCog):
             await ctx.bot.send_filtered(destination=confession_room, embed=confession)
         except discord.errors.Forbidden:
             return await ctx.author.send("I don't have permission to send messages to this room or something went wrong.")
-        confession.set_footer(text="If this confession is ToS-breaking or overtly hateful, you can report it using [prefix]report{}".format(ctx.message.id))
-        await ctx.bot.edit(embed=confession)
 
         await ctx.author.send("Your confession has been sent.")
