@@ -131,7 +131,7 @@ class LyricsFinder(commands.Cog):
         await ctx.send(embed=embed)
 
         async with ctx.typing():
-                title, artist, lyrics, source = await getlyrics('{} {}'.format(spot.artist, spot.title))
+            title, artist, lyrics, source = await getlyrics('{} {}'.format(spot.artist, spot.title))
             title = "" if title == "" else '{} by {}'.format(title, artist)
             paged_embeds = []
             paged_content = [p for p in pagify(lyrics, page_length=900)]
