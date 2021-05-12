@@ -1,5 +1,5 @@
 import re
-from typing import MutableMapping, Mapping
+from typing import MutableMapping, Mapping, Optional
 
 import discord
 import lavalink
