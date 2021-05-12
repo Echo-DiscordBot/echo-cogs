@@ -94,7 +94,7 @@ class LyricsFinder(commands.Cog):
         User arguments - artist/song
         """
         async with ctx.typing():
-                title, artist, lyrics, source = await getlyrics('{} {}'.format(spot.artist, spot.title))
+            title, artist, lyrics, source = await getlyrics('{} {}'.format(spot.artist, spot.title))
             title = "" if title == "" else '{} by {}'.format(title, artist)
             paged_embeds = []
             paged_content = [p for p in pagify(lyrics, page_length=900)]
@@ -104,8 +104,8 @@ class LyricsFinder(commands.Cog):
                 e.set_footer(
                     text='Requested by {} | Source: {} | Page: {}/{}'.format(ctx.message.author, source, index+1,
                                                                                  len(paged_content)))
-                    paged_embeds.append(e)
-                    await ctx.send(embed=e,delete_after=420.0)
+                paged_embeds.append(e)
+                await ctx.send(embed=e,delete_after=420.0)
 
     @lyricsfinder.command()
     @commands.bot_has_permissions(embed_links=True)
@@ -141,8 +141,8 @@ class LyricsFinder(commands.Cog):
                 e.set_footer(
                     text='Requested by {} | Source: {} | Page: {}/{}'.format(ctx.message.author, source, index+1,
                                                                                  len(paged_content)))
-                    paged_embeds.append(e)
-                    await ctx.send(embed=e,delete_after=420.0)
+                paged_embeds.append(e)
+                await ctx.send(embed=e,delete_after=420.0)
 
     @lyricsfinder.command()
     @commands.bot_has_permissions(embed_links=True)
@@ -172,8 +172,8 @@ class LyricsFinder(commands.Cog):
                 e.set_footer(
                     text='Requested by {} | Source: {} | Page: {}/{}'.format(ctx.message.author, source, index+1,
                                                                                  len(paged_content)))
-                    paged_embeds.append(e)
-                    await ctx.send(embed=e,delete_after=420.0)
+                paged_embeds.append(e)
+                await ctx.send(embed=e,delete_after=420.0)
 
 async def getlyrics(artistsong):
     percents = {" ": "+", "!": "%21", '"': "%22", "#": "%23", "$": "%24", "%": "%25", "&": "%26", "'": "%27",
