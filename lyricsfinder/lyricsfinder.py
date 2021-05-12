@@ -59,7 +59,6 @@ class LyricsFinder(commands.Cog):
                                                                                      len(paged_content)))
                         await notify_channel.send(embed=e,delete_after=420.0)
                         paged_embeds.append(e)
-                #await menu(notify_channel, paged_embeds, controls=DEFAULT_CONTROLS, timeout=180.0)
                 
             except discord.Forbidden:
                 return await notify_channel.send("Missing embed permissions..")
@@ -77,6 +76,7 @@ class LyricsFinder(commands.Cog):
         """Search lyrics or lyrics from bot's current track."""
 
     @lyricsfinder.command()
+    @commands.bot_has_permissions(embed_links=True)
     async def autolyrics(self, ctx):
         """Toggle Lyrics to be shown when a new track starts"""
         auto_lyrics = await self.config.guild(ctx.guild).auto_lyrics()
@@ -87,6 +87,7 @@ class LyricsFinder(commands.Cog):
             await ctx.send("Lyrics will no longer be shown when a track starts.")
 
     @lyricsfinder.command()
+    @commands.bot_has_permissions(embed_links=True)
     async def search(self, ctx, *, artistsong: str):
         """
         Returns Lyrics for Song Lookup.
@@ -95,8 +96,9 @@ class LyricsFinder(commands.Cog):
         try:
             async with ctx.typing():
                 title, artist, lyrics, source = await getlyrics(artistsong)
+                title = "" if title == "" else '{} by {}'.format(title, artist)
                 paged_embeds = []
-                paged_content = [p for p in pagify(lyrics)]
+                paged_content = [p for p in pagify(lyrics, page_length=900)]
                 for index, page in enumerate(paged_content):
                     e = discord.Embed(title='{} by {}'.format(title, artist), description=page,
                                       colour=await self.bot.get_embed_color(ctx.channel))
@@ -105,12 +107,10 @@ class LyricsFinder(commands.Cog):
                                                                                  len(paged_content)))
                     paged_embeds.append(e)
                     await ctx.send(embed=e,delete_after=420.0)
-            #await menu(ctx, paged_embeds, controls=DEFAULT_CONTROLS, timeout=420.0)
-        except discord.Forbidden:
-            return await ctx.send("Missing embed permissions..")
 
     @lyricsfinder.command()
-    async def spotify(self, ctx, user: discord.Member):
+    @commands.bot_has_permissions(embed_links=True)
+    async def spotify(self, ctx, user: Optional[discord.Member] = None):
         """
         Returns Lyrics from Discord Member song.
         User arguments - Mention/ID
@@ -131,23 +131,22 @@ class LyricsFinder(commands.Cog):
         embed.set_thumbnail(url=spot.album_cover_url)
         await ctx.send(embed=embed)
 
-        try:
-            async with ctx.typing():
+        async with ctx.typing():
                 title, artist, lyrics, source = await getlyrics('{} {}'.format(spot.artist, spot.title))
-                paged_embeds = []
-                paged_content = [p for p in pagify(lyrics)]
-                for index, page in enumerate(paged_content):
-                    e = discord.Embed(title='{} by {}'.format(title, artist), description=page,
-                                      colour=await self.bot.get_embed_color(ctx.channel))
-                    e.set_footer(
-                        text='Requested by {} | Source: {} | Page: {}/{}'.format(ctx.message.author, source, index+1,
+            title = "" if title == "" else '{} by {}'.format(title, artist)
+            paged_embeds = []
+            paged_content = [p for p in pagify(lyrics, page_length=900)]
+            for index, page in enumerate(paged_content):
+                e = discord.Embed(title='{}'.format(title), description=page,
+                                  colour=await self.bot.get_embed_color(ctx.channel))
+                e.set_footer(
+                    text='Requested by {} | Source: {} | Page: {}/{}'.format(ctx.message.author, source, index+1,
                                                                                  len(paged_content)))
                     paged_embeds.append(e)
-            await menu(ctx, paged_embeds, controls=DEFAULT_CONTROLS, timeout=420.0)
-        except discord.Forbidden:
-            return await ctx.send("Missing embed permissions..")
+                    await ctx.send(embed=e,delete_after=420.0)
 
     @lyricsfinder.command()
+    @commands.bot_has_permissions(embed_links=True)
     async def playing(self, ctx):
         """
         Returns Lyrics for bot's current track.
@@ -163,23 +162,19 @@ class LyricsFinder(commands.Cog):
         else:
             return await ctx.send("Audio not loaded.")
 
-        try:
-            async with ctx.typing():
-                title, artist, lyrics, source = await getlyrics(botsong)
-                paged_embeds = []
-                paged_content = [p for p in pagify(lyrics)]
-                for index, page in enumerate(paged_content):
-                    e = discord.Embed(title='{} by {}'.format(title, artist), description=page,
-                                      colour=await self.bot.get_embed_color(ctx.channel))
-                    e.set_footer(
-                        text='Requested by {} | Source: {} | Page: {}/{}'.format(ctx.message.author, source, index+1,
+        async with ctx.typing():
+            title, artist, lyrics, source = await getlyrics(botsong)
+            title = "" if title == "" else '{} by {}'.format(title, artist)
+            paged_embeds = []
+            paged_content = [p for p in pagify(lyrics, page_length=900)]
+            for index, page in enumerate(paged_content):
+                e = discord.Embed(title='{}'.format(title), description=page,
+                                  colour=await self.bot.get_embed_color(ctx.channel))
+                e.set_footer(
+                    text='Requested by {} | Source: {} | Page: {}/{}'.format(ctx.message.author, source, index+1,
                                                                                  len(paged_content)))
                     paged_embeds.append(e)
                     await ctx.send(embed=e,delete_after=420.0)
-            #await menu(ctx, paged_embeds, controls=DEFAULT_CONTROLS, timeout=420.0)
-        except discord.Forbidden:
-            return await ctx.send("Missing embed permissions..")
-
 
 async def getlyrics(artistsong):
     percents = {" ": "+", "!": "%21", '"': "%22", "#": "%23", "$": "%24", "%": "%25", "&": "%26", "'": "%27",
@@ -194,13 +189,19 @@ async def getlyrics(artistsong):
     future = session.get("https://google.com/search?q=" + searchquery + "+lyrics")
     response_one = future.result()
     soup = BeautifulSoup(response_one.text, 'html.parser')
-    try:
-        title_ = soup.find('span', class_="BNeawe tAd8D AP7Wnd").get_text()
-        artist_ = soup.find_all('span', class_="BNeawe s3v9rd AP7Wnd")[-1].get_text()
-        lyrics_ = soup.find_all('div', class_="BNeawe tAd8D AP7Wnd")[-1].get_text()
-        source_ = soup.find_all('span', class_="uEec3 AP7Wnd")[-1].get_text()
-    except AttributeError:
-        title_, artist_, lyrics_, source_ = "Not Found: {}".format(artistsong), "Not Found: {}".format(artistsong), \
-                                            "Not Found: {}".format(artistsong), "Not Found: {}".format(artistsong)
+    bouncer = "Our systems have detected unusual traffic from your computer network"
+    if bouncer in soup.get_text():
+        title_ = ""
+        artist_ = ""
+        lyrics_ = "Google has detected us being suspicious, try again later."
+        source_ = ""
+    else:
+        try:
+            title_ = soup.find('span', class_="BNeawe tAd8D AP7Wnd").get_text()
+            artist_ = soup.find_all('span', class_="BNeawe s3v9rd AP7Wnd")[-1].get_text()
+            lyrics_ = soup.find_all('div', class_="BNeawe tAd8D AP7Wnd")[-1].get_text()
+            source_ = soup.find_all('span', class_="uEec3 AP7Wnd")[-1].get_text()
+        except AttributeError:
+            title_, artist_, lyrics_, source_ = "", "", "Not able to find the lyrics for {}.".format(searchquery), ""
     session.close()
     return title_, artist_, lyrics_, source_
