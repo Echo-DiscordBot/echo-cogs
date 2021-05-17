@@ -88,8 +88,10 @@ class Confession(BaseCog):
                 embed.title = "Where do you want to confess?"
                 embed.description = guild.name
                 embeds.append(embed)
-
-            await menu(ctx, pages=embeds, controls=SELECT_CONTROLS, message=None, page=0, timeout=20)
+            try:
+                await menu(ctx, pages=embeds, controls=SELECT_CONTROLS, message=None, page=0, timeout=20)
+            except:
+                return
 
     async def selected_guild(self, ctx, user_guilds, confession, page):
 
