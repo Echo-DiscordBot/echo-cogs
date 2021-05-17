@@ -119,4 +119,4 @@ class Confession(BaseCog):
         except discord.errors.Forbidden:
             return await ctx.author.send("I don't have permission to send messages to this room or something went wrong.")
 
-        await ctx.author.send("Your confession has been sent.")
+        await ctx.author.send("Your confession has been sent to: "+ confession_guild)
