@@ -98,14 +98,15 @@ class Confession(BaseCog):
 
     async def send_confession(self, ctx, confession_guild, confession):
 
-        rooms = await self.config.guild(confession_guild).confession_rooms()
-
-        for channel in confession_guild.text_channels:
-            if rooms == channel.id:
-                confession_room = channel
-
-        if not confession_room:
-            return await ctx.author.send("The confession room does not appear to exist.")
+        try:
+            rooms = await self.config.guild(confession_guild).confession_rooms()
+            for channel in confession_guild.text_channels:
+                if rooms == channel.id:
+                    confession_room = channel
+            if not confession_room:
+                    return await ctx.author.send("The confession room does not appear to exist.")
+        except:
+            return await ctx.author.send("The confession room for the selected sever does not exist.")
 
         try:
             await ctx.bot.send_filtered(destination=confession_room, embed=confession)
