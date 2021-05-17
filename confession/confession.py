@@ -108,7 +108,11 @@ class Confession(BaseCog):
             if not confession_room:
                     return await ctx.author.send("The confession room does not appear to exist.")
         except:
-            return await ctx.author.send("The confession room for the selected sever does not exist.")
+            try:
+                await self.config.guild(confession_guild).confession_rooms.set("")
+            except:
+                return
+            return await ctx.author.send("The confession room does not exist.")
 
         try:
             await ctx.bot.send_filtered(destination=confession_room, embed=confession)
