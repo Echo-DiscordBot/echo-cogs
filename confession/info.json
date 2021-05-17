@@ -1,9 +1,11 @@
 {
-  "author" : ["Jintaku","anamolsapkota"],
+  "author" : ["anamolsapkota"],
   "bot_version": [3,0,0],
-  "install_msg" : "Let your users confess in secrecy!",
+  "install_msg" : "Lets you confess anonymously!",
   "short" : "Confess secretly.",
-  "description" : "Confess secretly.",
+  "description" : "Confess anonymously.",
+  "disabled": false,
   "tags" : ["confession", "secret"],
-  "hidden" : false
+  "hidden" : false,
+  "end_user_data_statement": "This cog does not persistently store data or metadata about users."
 }
