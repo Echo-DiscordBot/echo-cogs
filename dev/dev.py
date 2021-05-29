@@ -29,7 +29,6 @@ _ = Translator("Dev", __file__)
 START_CODE_BLOCK_RE = re.compile(r"^((```py(thon)?)(?=\s)|(```))")
 
 
-@cog_i18n(_)
 class Dev(commands.Cog):
     """Various development focused utilities."""
 
@@ -45,6 +44,13 @@ class Dev(commands.Cog):
         self._last_result = None
         self.sessions = {}
         self.env_extensions = {}
+        
+    def format_help_for_context(self, ctx: commands.Context) -> str:
+        """
+            Thanks Sinbad!
+        """
+        pre_processed = super().format_help_for_context(ctx)
+        return f"{pre_processed}\n\nCog Version: {self.__version__}"
 
     @staticmethod
     def async_compile(source, filename, mode):
