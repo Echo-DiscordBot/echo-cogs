@@ -12,11 +12,11 @@ from copy import copy
 
 import discord
 
-from . import checks, commands
-from .commands import NoParseOptional as Optional
-from .i18n import Translator, cog_i18n
-from .utils.chat_formatting import pagify
-from .utils.predicates import MessagePredicate
+from redbot.core import checks, commands
+from redbot.core.commands import NoParseOptional as Optional
+from redbot.core.i18n import Translator, cog_i18n
+from redbot.core.utils.chat_formatting import pagify
+from redbot.core.utils.predicates import MessagePredicate
 
 """
 Notice:
