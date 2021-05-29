@@ -31,6 +31,19 @@ START_CODE_BLOCK_RE = re.compile(r"^((```py(thon)?)(?=\s)|(```))")
 
 class Dev(commands.Cog):
     """Various development focused utilities."""
+    
+    __version__ = "3.4.3"
+    __author__ = [
+        "R.Danny",
+        "Toby",
+        "Will",
+        "Michael",
+        "Eslyium",
+        "Preda",
+        "NeuroAssassin",
+        "TrustyJAID",
+        "Echo"
+    ]
 
     async def red_delete_data_for_user(self, **kwargs):
         """
